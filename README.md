@@ -20,6 +20,12 @@ bun run build
 ```
 Six React Refresh warnings were recorded in the original workspace. Treat test results and evidence boundaries independently.
 
+## Operating procedures
+
+- [Lovable-to-BWM source sync](docs/SOURCE_SYNC_RUNBOOK.md)
+- [Release and rollback checklist](docs/RELEASE_RUNBOOK.md)
+- [Public-source path guard](scripts/check_public_mirror.py) — checks sensitive **filenames/paths** only, not file content.
+
 ## Workflow
 Propose changes in a branch and review via pull request. Reconcile any changes back to Lovable explicitly. Refer to [SOURCE_PROVENANCE.md](SOURCE_PROVENANCE.md).
 
