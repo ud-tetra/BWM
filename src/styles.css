@@ -1,0 +1,134 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-display: "Cormorant Garamond", Georgia, serif;
+  --font-serif: "Source Serif 4", Georgia, serif;
+  --font-sans: "Inter", system-ui, sans-serif;
+  --radius-sm: calc(var(--radius) - 2px);
+  --radius-md: var(--radius);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 2px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-sage: var(--sage);
+  --color-limestone: var(--limestone);
+  --color-forest: var(--forest);
+  --color-forest-foreground: var(--forest-foreground);
+}
+
+:root {
+  --radius: 0.125rem;
+  --ivory: oklch(0.966 0.009 85);
+  --background: var(--ivory);
+  --foreground: oklch(0.29 0.009 170);
+  --card: oklch(0.982 0.006 85);
+  --card-foreground: var(--foreground);
+  --popover: var(--card);
+  --popover-foreground: var(--foreground);
+  --forest: oklch(0.39 0.035 165);
+  --forest-foreground: var(--ivory);
+  --primary: var(--forest);
+  --primary-foreground: var(--ivory);
+  --sage: oklch(0.65 0.025 155);
+  --limestone: oklch(0.8 0.016 75);
+  --secondary: oklch(0.93 0.012 80);
+  --secondary-foreground: var(--foreground);
+  --muted: oklch(0.93 0.012 80);
+  --muted-foreground: oklch(0.45 0.015 165);
+  --accent: oklch(0.92 0.015 150);
+  --accent-foreground: var(--forest);
+  --destructive: oklch(0.55 0.18 27);
+  --destructive-foreground: var(--ivory);
+  --border: oklch(0.85 0.014 75);
+  --input: var(--border);
+  --ring: var(--forest);
+}
+
+@layer base {
+  * { border-color: var(--color-border); }
+  html { scroll-behavior: smooth; }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-serif);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 500; letter-spacing: -0.01em; line-height: 1.08; }
+  ::selection { background: var(--accent); color: var(--forest); }
+  :focus-visible { outline: 2px solid var(--ring); outline-offset: 3px; }
+}
+
+@utility eyebrow {
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--muted-foreground);
+}
+
+@utility rule {
+  border-top: 1px solid var(--border);
+}
+
+@utility prose-editorial {
+  font-family: var(--font-serif);
+  font-size: 1.075rem;
+  line-height: 1.8;
+  & p + p { margin-top: 1.1em; }
+  & h2 { font-size: 1.9rem; margin-top: 2.2em; margin-bottom: 0.6em; }
+  & h3 { font-size: 1.4rem; margin-top: 1.8em; margin-bottom: 0.4em; }
+  & ul { margin-top: 0.8em; padding-left: 1.2em; list-style: none; }
+  & li { position: relative; margin-top: 0.45em; }
+  & li::before { content: ""; position: absolute; left: -1.1em; top: 0.85em; width: 0.55em; border-top: 1px solid var(--sage); }
+}
+
+@utility link-quiet {
+  text-decoration: underline;
+  text-decoration-color: var(--limestone);
+  text-underline-offset: 4px;
+  transition: text-decoration-color 0.3s, color 0.3s;
+  &:hover { text-decoration-color: var(--forest); color: var(--forest); }
+}
+
+@keyframes rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+@keyframes draw { from { stroke-dashoffset: 1200; } to { stroke-dashoffset: 0; } }
+
+@utility animate-rise { animation: rise 0.9s cubic-bezier(.2,.7,.2,1) both; }
+@utility animate-draw { stroke-dasharray: 1200; animation: draw 3.2s ease-out both; }
+
+/* Reduced motion: no smooth scroll; animated content shown in final state. /proof print rules retired (see docs/EDITORIAL_PROOF_ARCHIVE.md). */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto !important; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .animate-rise { opacity: 1 !important; transform: none !important; }
+  .animate-draw { stroke-dasharray: none !important; stroke-dashoffset: 0 !important; }
+}
+
+@media print {
+  @page { margin: 18mm 16mm; }
+  html, body { background: #fff !important; color: #111 !important; font-size: 11pt; }
+  a { color: #111 !important; text-decoration: none; }
+}
