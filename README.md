@@ -1,12 +1,26 @@
-# BWM — Benjamin Mayes Professional Website
+# BWM — Benjamin Mayes Website
 
-Source repository for the [Benjamin Mayes professional portfolio](https://benmayes.lovable.app).
+Source mirror for the [Benjamin Mayes professional portfolio](https://benmayes.lovable.app).
 
-**Source of truth:** The live application is currently maintained in Lovable. This repository is intended to hold a reviewed, versioned source snapshot and release documentation. A GitHub copy does **not** automatically sync with Lovable or deploy the website.
+Built with **React, TypeScript, TanStack Start and Tailwind CSS**. The authoritative authoring workspace is the [Lovable project](https://lovable.dev/projects/48d19147-4435-4f58-894e-ecab0345cb7c); this GitHub repository is a manually maintained snapshot and does not automatically sync to Lovable or deploy to the live site.
 
-The initial website import will be proposed through a reviewable pull request. Internal editorial review and approval records are excluded from this public repository.
+## Local development
+With Bun installed:
 
-- Website: https://benmayes.lovable.app
-- Lovable project: https://lovable.dev/projects/48d19147-4435-4f58-894e-ecab0345cb7c
+```sh
+bun install --frozen-lockfile
+bun run dev
+```
 
-No license is granted by this README.
+## Verification
+```sh
+bunx vitest run
+bunx eslint .
+bun run build
+```
+Six React Refresh warnings were recorded in the original workspace. Treat test results and evidence boundaries independently.
+
+## Workflow
+Propose changes in a branch and review via pull request. Reconcile any changes back to Lovable explicitly. Refer to [SOURCE_PROVENANCE.md](SOURCE_PROVENANCE.md).
+
+No license is granted by this repository's contents.
